@@ -11,6 +11,9 @@ const corsOptions = {
 };
 app.use(cors(corsOptions));
 
+app.use(express.json());
+
+// Route for challenge medium
 app.post("/api/movies/:title", async (req, res) => {
   try {
     if (!req.params.title) return res.json({ error: "Movie title required." });
@@ -34,7 +37,48 @@ app.post("/api/movies/:title", async (req, res) => {
   }
 });
 
-app.post("/api/tasks", async (req, res) => {});
+// Route for challenge hard
+const tasks = [];
+app.get("api/tasks", (req, res) => {
+  res.json(tasks);
+});
+
+app.post("/api/tasks", (req, res) => {
+  if (!req.body) return res.json({ error: "No task submitted" });
+  console.log(req.body);
+  tasks.unshift(req.body);
+  res.json(tasks);
+});
+
+app.patch("/api/tasks/:id", (req, res) => {
+  if (!req.params.id)
+    return res.json({ error: "Cannot modify task without id" });
+
+  const index = tasks.findIndex(
+    (task) => String(task.id) === String(req.params.id)
+  );
+
+  if (index === -1) return res.json({ error: "Task not found" });
+  console.log(req.body);
+
+  Object.assign(tasks[index], req.body);
+  return res.send(tasks[index].description);
+});
+
+app.delete("/api/tasks{/:id}", (req, res) => {
+  if (req.params.id) {
+    const index = tasks.findIndex(
+      (task) => String(task.id) === String(req.params.id)
+    );
+    if (index === -1) return res.json({ error: "Task not found" });
+
+    tasks.splice(index, 1);
+    return res.json({ message: "Successfully deleted task" });
+  }
+
+  tasks.length = 0;
+  return res.json({ message: "Tasks list cleared" });
+});
 
 app.listen(PORT, "0.0.0.0", () => {
   console.log(`Server running on port ${PORT}`);
