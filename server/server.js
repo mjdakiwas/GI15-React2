@@ -45,9 +45,10 @@ app.get("api/tasks", (req, res) => {
 
 app.post("/api/tasks", (req, res) => {
   if (!req.body) return res.json({ error: "No task submitted" });
-  console.log(req.body);
-  tasks.unshift(req.body);
-  res.json(tasks);
+
+  const newTask = req.body;
+  tasks.unshift(newTask);
+  res.json(newTask);
 });
 
 app.patch("/api/tasks/:id", (req, res) => {
@@ -59,10 +60,9 @@ app.patch("/api/tasks/:id", (req, res) => {
   );
 
   if (index === -1) return res.json({ error: "Task not found" });
-  console.log(req.body);
 
   Object.assign(tasks[index], req.body);
-  return res.send(tasks[index].description);
+  return res.send({ task: tasks[index] });
 });
 
 app.delete("/api/tasks{/:id}", (req, res) => {

@@ -1,8 +1,12 @@
 import { useState, useEffect } from "react";
+import Task from "./Task";
+import EditTask from "./EditTask";
 
 export default function TodoList() {
   const [task, setTask] = useState("");
   const [tasks, setTasks] = useState([]);
+  const [isEditing, setIsEditing] = useState(false);
+  const [editingId, setEditingId] = useState(null);
 
   const addTask = async (e) => {
     e.preventDefault();
@@ -22,7 +26,7 @@ export default function TodoList() {
         });
         if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
         const data = await res.json();
-        setTasks(data);
+        setTasks((prev) => [data, ...prev]);
         setTask("");
       } catch (err) {
         console.log("Error submitting form:", err);
@@ -46,20 +50,19 @@ export default function TodoList() {
     }
   };
 
-  const editTask = async (id) => {
+  const updateTask = async (id, updates) => {
     try {
       const res = await fetch(`/api/tasks/${id}`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(),
+        body: JSON.stringify(updates),
       });
       if (!res.ok) throw new Error("Failed to modify task");
       const data = await res.json();
       console.log(data);
-      const modifiedTask = tasks.indexOf(data.id);
-      setTasks((prevTasks) => (prevTasks[modifiedTask] = modifiedTask));
+      setTasks((prev) => prev.map((t) => (t.id === id ? data.task : t)));
     } catch (err) {
       console.log("Error modifying task:", err);
     }
@@ -80,6 +83,8 @@ export default function TodoList() {
       console.log("Error clearing task list:", err);
     }
   };
+
+  console.log(tasks);
 
   return (
     <main>
@@ -103,13 +108,25 @@ export default function TodoList() {
       <h2>To do List</h2>
       <button onClick={() => clearList()}>Clear</button>
       <section className="task-list">
-        {tasks.map((task, index) => (
-          <div key={index}>
-            <p>{task.description}</p>
-            <button onClick={() => editTask(task.id)}>Edit</button>
-            <button onClick={() => deleteTask(task.id)}>Delete</button>
-          </div>
-        ))}
+        {tasks.map((task, index) =>
+          isEditing && editingId === task.id ? (
+            <EditTask
+              key={index}
+              task={task}
+              setIsEditing={setIsEditing}
+              setEditingId={setEditingId}
+              updateTask={updateTask}
+            />
+          ) : (
+            <Task
+              key={index}
+              task={task}
+              setIsEditing={setIsEditing}
+              setEditingId={setEditingId}
+              deleteTask={deleteTask}
+            />
+          )
+        )}
       </section>
     </main>
   );
