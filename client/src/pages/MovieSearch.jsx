@@ -11,7 +11,7 @@ export default function MovieSearch() {
     e.preventDefault();
     try {
       const res = await fetch(
-        `${import.meta.env.BACKEND_URL}/api/movies/${movieInput}`,
+        `${import.meta.env.VITE_API_URL}/api/movies/${movieInput}`,
         {
           method: "POST",
           headers: {
