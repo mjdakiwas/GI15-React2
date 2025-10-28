@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Task from "../components/todo-app/Task";
 import EditTask from "../components/todo-app/EditTask";
 import "../styles/todo-app/todoPg.css";
@@ -14,7 +14,7 @@ export default function TodoList() {
 
     if (task.trim() !== "") {
       try {
-        const res = await fetch(`${BACKEND_URL}/api/tasks`, {
+        const res = await fetch(`${import.meta.env.BACKEND_URL}/api/tasks`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -37,12 +37,15 @@ export default function TodoList() {
 
   const deleteTask = async (id) => {
     try {
-      const res = await fetch(`${BACKEND_URL}/api/tasks/${id}`, {
-        method: "DELETE",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
+      const res = await fetch(
+        `${import.meta.env.BACKEND_URL}/api/tasks/${id}`,
+        {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
       if (!res.ok) throw new Error("Failed to delete task");
       const data = await res.json();
       setTasks((prevTasks) => prevTasks.filter((task) => task.id !== id));
@@ -53,13 +56,16 @@ export default function TodoList() {
 
   const updateTask = async (id, updates) => {
     try {
-      const res = await fetch(`${BACKEND_URL}/api/tasks/${id}`, {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(updates),
-      });
+      const res = await fetch(
+        `${import.meta.env.BACKEND_URL}/api/tasks/${id}`,
+        {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(updates),
+        }
+      );
       if (!res.ok) throw new Error("Failed to modify task");
       const data = await res.json();
       console.log(data);
@@ -71,7 +77,7 @@ export default function TodoList() {
 
   const clearList = async () => {
     try {
-      const res = await fetch(`${BACKEND_URL}/api/tasks`, {
+      const res = await fetch(`${import.meta.env.BACKEND_URL}/api/tasks`, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
