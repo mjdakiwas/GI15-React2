@@ -1,6 +1,6 @@
 import { Routes, Route } from "react-router-dom";
 import "./App.css";
-import NavBar from "./components/Navbar.jsx";
+import NavBar from "./components/NavBar.jsx";
 import Counter from "./pages/Counter.jsx";
 import MovieSearch from "./pages/MovieSearch.jsx";
 import TodoList from "./pages/TodoList.jsx";
