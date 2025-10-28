@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
-import Task from "./Task";
-import EditTask from "./EditTask";
+import Task from "../components/todo-app/Task";
+import EditTask from "../components/todo-app/EditTask";
+import "../styles/todo-app/todoPg.css";
 
 export default function TodoList() {
   const [task, setTask] = useState("");
@@ -87,46 +88,55 @@ export default function TodoList() {
   console.log(tasks);
 
   return (
-    <main>
+    <main className="todo-pg">
       <h1>Challenge: Hard</h1>
       <p>
-        Develop a to-do list app with React hooks and React Router. Implement
-        features like adding, editing, and deleting tasks. Use React Router to
-        navigate between different pages, such as a task list and a task detail
-        page.
+        Task: Develop a to-do list app with React hooks and React Router.
+        Implement features like adding, editing, and deleting tasks. Use React
+        Router to navigate between different pages, such as a task list and a
+        task detail page.
       </p>
-      <form onSubmit={addTask}>
-        <label htmlFor="add">Add Task</label>
+      <form onSubmit={addTask} className="add-task__form">
+        <label htmlFor="add" className="add-task__label">
+          Add Task
+        </label>
         <input
           type="text"
           id="add-task"
+          className="add-task__input"
           value={task}
           onChange={(e) => setTask(e.target.value)}
         />
-        <button type="submit">Add</button>
+        <button type="submit" className="add-task__submitBtn">
+          Add
+        </button>
       </form>
-      <h2>To do List</h2>
-      <button onClick={() => clearList()}>Clear</button>
       <section className="task-list">
-        {tasks.map((task, index) =>
-          isEditing && editingId === task.id ? (
-            <EditTask
-              key={index}
-              task={task}
-              setIsEditing={setIsEditing}
-              setEditingId={setEditingId}
-              updateTask={updateTask}
-            />
-          ) : (
-            <Task
-              key={index}
-              task={task}
-              setIsEditing={setIsEditing}
-              setEditingId={setEditingId}
-              deleteTask={deleteTask}
-            />
-          )
-        )}
+        <h2>To do List</h2>
+        <button onClick={() => clearList()} className="clearBtn">
+          Clear
+        </button>
+        <div>
+          {tasks.map((task, index) =>
+            isEditing && editingId === task.id ? (
+              <EditTask
+                key={index}
+                task={task}
+                setIsEditing={setIsEditing}
+                setEditingId={setEditingId}
+                updateTask={updateTask}
+              />
+            ) : (
+              <Task
+                key={index}
+                task={task}
+                setIsEditing={setIsEditing}
+                setEditingId={setEditingId}
+                deleteTask={deleteTask}
+              />
+            )
+          )}
+        </div>
       </section>
     </main>
   );

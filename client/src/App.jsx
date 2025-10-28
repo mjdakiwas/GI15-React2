@@ -1,17 +1,14 @@
 import { Routes, Route } from "react-router-dom";
-import Button from "./components/Button.jsx";
+import "./App.css";
+import NavBar from "./components/Navbar.jsx";
 import Counter from "./pages/Counter.jsx";
-import MovieSearch from "./pages/movie-app/MovieSearch.jsx";
-import TodoList from "./pages/todo-app/TodoList.jsx";
+import MovieSearch from "./pages/MovieSearch.jsx";
+import TodoList from "./pages/TodoList.jsx";
 
 function App() {
   return (
     <>
-      <nav>
-        <Button src="/" page="Counter" />
-        <Button src="/search-movies" page="Search Movies" />
-        <Button src="/to-do" page="To Do List" />
-      </nav>
+      <NavBar />
 
       <Routes>
         <Route path="/" element={<Counter />} />

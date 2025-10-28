@@ -1,0 +1,19 @@
+.movie-pg {
+  display: flex;
+  flex-direction: column;
+  row-gap: 1rem;
+}
+
+.movie-search {
+  display: flex;
+  flex-direction: row;
+  column-gap: 1rem;
+  max-width: 35rem;
+  align-items: center;
+}
+
+.results {
+  display: flex;
+  flex-direction: column;
+  row-gap: 2rem;
+}

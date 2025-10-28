@@ -1,4 +1,5 @@
 import { useState } from "react";
+import "../../styles/todo-app/task.css";
 
 export default function EditTask({
   task,
@@ -15,11 +16,12 @@ export default function EditTask({
   };
 
   return (
-    <div>
+    <div className="task">
       <input
         type="text"
         value={editedDesc}
         onChange={(e) => setEditedDesc(e.target.value)}
+        className="task__descriptionInput"
       />
       <button onClick={() => setIsEditing(false)}>Cancel</button>
       <button onClick={handleSave}>Save</button>

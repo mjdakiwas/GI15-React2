@@ -1,0 +1,43 @@
+.counter-pg {
+  display: flex;
+  flex-direction: column;
+  row-gap: 1rem;
+}
+
+.counter__container {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  grid-template-rows: auto 1fr;
+  text-align: center;
+  min-width: 20rem;
+  max-width: 30rem;
+  align-items: center;
+  margin: 2rem auto;
+}
+
+.counter__title {
+  grid-column: 1 / 4;
+}
+
+.counter {
+  font-size: 6rem;
+  font-weight: 800;
+}
+
+.counter__btn {
+  background-color: #b74f6f;
+  border: none;
+  border-radius: 6rem;
+  cursor: pointer;
+  width: 4rem;
+  height: 4rem;
+  max-width: 6rem;
+  max-height: 6rem;
+  font-size: 2rem;
+  font-weight: 600;
+}
+
+.counter__btn:hover {
+  background-color: #102e4a;
+  color: white;
+}

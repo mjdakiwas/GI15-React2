@@ -1,42 +1,67 @@
-/* #root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
-}
-
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+li,
+label {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+ul {
+  list-style: none;
 }
 
-.card {
-  padding: 2em;
+a {
+  color: black;
+  text-decoration: none;
 }
 
-.read-the-docs {
-  color: #888;
-} */
+main {
+  margin: 1rem;
+}
+
+h1 {
+  margin-bottom: 1rem;
+}
+
+button {
+  cursor: pointer;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 0.5rem;
+  background-color: #102e4a;
+  color: white;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+button:hover {
+  background-color: #b74f6f;
+  color: black;
+}
+
+label {
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+input {
+  width: 100%;
+  border: 1px solid #102e4a;
+  border-radius: 0.5rem;
+  padding: 0.75rem;
+}
+
+input:focus {
+  outline: none;
+  border: 1px solid #b74f6f;
+}
