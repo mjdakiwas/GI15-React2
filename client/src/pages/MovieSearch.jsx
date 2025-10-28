@@ -10,7 +10,7 @@ export default function MovieSearch() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await fetch(`/api/movies/${movieInput}`, {
+      const res = await fetch(`${BACKEND_URL}/api/movies/${movieInput}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

@@ -14,7 +14,7 @@ export default function TodoList() {
 
     if (task.trim() !== "") {
       try {
-        const res = await fetch("/api/tasks", {
+        const res = await fetch(`${BACKEND_URL}/api/tasks`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -37,7 +37,7 @@ export default function TodoList() {
 
   const deleteTask = async (id) => {
     try {
-      const res = await fetch(`/api/tasks/${id}`, {
+      const res = await fetch(`${BACKEND_URL}/api/tasks/${id}`, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
@@ -53,7 +53,7 @@ export default function TodoList() {
 
   const updateTask = async (id, updates) => {
     try {
-      const res = await fetch(`/api/tasks/${id}`, {
+      const res = await fetch(`${BACKEND_URL}/api/tasks/${id}`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
@@ -71,7 +71,7 @@ export default function TodoList() {
 
   const clearList = async () => {
     try {
-      const res = await fetch(`/api/tasks`, {
+      const res = await fetch(`${BACKEND_URL}/api/tasks`, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
