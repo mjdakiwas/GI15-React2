@@ -10,13 +10,16 @@ export default function MovieSearch() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await fetch(`${BACKEND_URL}/api/movies/${movieInput}`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ movie: movieInput }),
-      });
+      const res = await fetch(
+        `${import.meta.env.BACKEND_URL}/api/movies/${movieInput}`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ movie: movieInput }),
+        }
+      );
       if (!res.ok) throw new Error(`Failed to fetch: ${res}`);
       const data = await res.json();
       console.log("Fetched data:", data.results);
